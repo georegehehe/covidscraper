@@ -9,11 +9,9 @@ def locate_positive(txt):
         new_normal = txt.split(top_keyword[0], 1)[1]
     else:
         return ""
-    if l2_keyword in new_normal and "(" in new_normal and ")" in new_normal:
-        new_native = new_normal.split(l2_keyword, 1)[1].split("（", 1)[1].split("）", 1)[0]
-        return new_native
-    else:
-        return ""
+    new_native = new_normal.split(l2_keyword, 1)[1].split("（", 1)[1].split("）", 1)[0]
+    return new_native
+
 
 # 本土无症状: if no keywords found, then return an empty string to avoid error
 def locate_asymptomatic(txt):
@@ -21,11 +19,8 @@ def locate_asymptomatic(txt):
         new_normal = txt.split(top_keyword[1], 1)[1]
     else:
         return ""
-    if l2_keyword in new_normal and "(" in new_normal and ")" in new_normal:
-        new_native = new_normal.split(l2_keyword, 1)[1].split("（", 1)[1].split("）", 1)[0]
-        return new_native
-    else:
-        return ""
+    new_native = new_normal.split(l2_keyword, 1)[1].split("（", 1)[1].split("）", 1)[0]
+    return new_native
 
 # given that txt contains needed information, determine the number of cases for each city
 def analyzer(txt, dict, mode):
@@ -33,6 +28,8 @@ def analyzer(txt, dict, mode):
         txt = locate_positive(txt)
     else:
         txt = locate_asymptomatic(txt)
+    if txt == "":
+        return True
     # separate txt by province
     province_list = txt.split("；")
     city_list = dict.keys()
@@ -48,6 +45,7 @@ def analyzer(txt, dict, mode):
                 except ValueError:
                     city_case_num = first_num(province)
                 dict[city][mode] = city_case_num
+    return False
 
 # a simple function to locate the first occurrence of a number in a string
 def first_num(txt):

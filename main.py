@@ -64,27 +64,33 @@ if  "__main__" == __name__:
     for i in range(len(link_list)):
         li = link_list[i]
         date = date_list[i]
-        try:
-            soup = BeautifulSoup(fetch(li), 'html.parser')
-        except:
-            soup = BeautifulSoup(fetch(li), 'html.parser')
-        # access all texts with id "xw_box"
-        all_text = soup.find_all('div', attrs={"id":"xw_box"})
-        str_list = []
-        # put all the texts into a single string variable
-        for element in all_text:
-            if element.text not in str_list:
-                str_list.append(element.text)
-        output = ""
-        for text in str_list:
-            output = text + output
-        # use functions from other files to generate a dictionary which maps every city to its key attributes such as
-        # its province and the number of cases (本土 and 无症状 respectively), then use the text analyzer to fill in the missing
-        # fields (number of cases in this case)
-        cities = create_dict()
-        text_analyzer.analyzer(output, cities, "本土")
-        text_analyzer.analyzer(output, cities, "无症状")
+        empty1 = True
+        empty2 = True
+        while empty1 or empty2:
+            try:
+                soup = BeautifulSoup(fetch(li), 'html.parser')
+            except:
+                soup = BeautifulSoup(fetch(li), 'html.parser')
+            print(soup.prettify())
+            # access all texts with id "xw_box"
+            all_text = soup.find_all('div', attrs={"id":"xw_box"})
+            str_list = []
+            # put all the texts into a single string variable
+            for element in all_text:
+                if element.text not in str_list:
+                    str_list.append(element.text)
+            output = ""
+            for text in str_list:
+                output = text + output
+            # use functions from other files to generate a dictionary which maps every city to its key attributes such as
+            # its province and the number of cases (本土 and 无症状 respectively), then use the text analyzer to fill in the missing
+            # fields (number of cases in this case)
+            cities = create_dict()
+            empty1 = text_analyzer.analyzer(output, cities, "本土")
+            empty2 = text_analyzer.analyzer(output, cities, "无症状")
+            print("EMPTY DATA%d: REATTEMPT", date)
         province_add(cities)
+        print(cities)
         city_list.append((date, cities))
     # combine the data scraped from every url page into a standard format that can be read into an Excel file
     out_list = dict_out(city_list)

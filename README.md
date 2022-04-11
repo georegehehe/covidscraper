@@ -4,7 +4,7 @@
 实现了对中国卫健委新冠信息网站的摘取，并返回含有各省市确诊人数的excel表格
 # 2.注意事项
 请查看requirements.txt的模组要求，并在运行前执行pip install以确保程序能正常运行。 
-请在python3.8环境下运行此程序。
+请在python3.8/3.10环境下运行此程序。
 
 此程序主要使用pyppeteer模组，通过访问chromium对网站发起http请求。因为chromium当前版本一些
 不稳定因素，程序有时候会报错，因此使用了try except方法拦截错误并重新发起请求。

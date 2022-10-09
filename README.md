@@ -1,4 +1,4 @@
-[**简体中文**](https://github.com/georegehehe/covidscraper) | [**English**](./README_EN.md)
+[**English**](https://github.com/georegehehe/covidscraper) | [**简体中文**](./README_ZH.md)
 # COVID SCRAPER
 # 1.Utilities
 This python-based program can be used to collect data regarding new Covid Cases in 450+ major Chinese cities from the Chinese National Health Commission Website with an excel output. Packages used includes pyppeteer, beautiful soup, and asyncio

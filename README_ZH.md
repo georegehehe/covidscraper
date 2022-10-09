@@ -1,4 +1,4 @@
-[**简体中文**](https://github.com/georegehehe/covidscraper) | [**English**](./README_EN.md)
+[**English**](https://github.com/georegehehe/covidscraper) | [**简体中文**](./README_ZH.md)
 # COVID SCRAPER
 # 1.功能
 此程序使用了python的一些基本库以及模组，包括pyppeteer, beautiful soup, 以及 asyncio
